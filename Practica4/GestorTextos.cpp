@@ -54,24 +54,45 @@ GestorTextos::GestorTextos(const GestorTextos& orig) {
 GestorTextos::~GestorTextos() {
 }
 
-void GestorTextos::addDocumento(string _documento, int tipoDiccionario) {
+void GestorTextos::addDocumento(string _documento) {
 
     Documento nuevoDoc(_documento, &diccionario);
     documentos.push_back(nuevoDoc);
 }
 
+/**
+ * Función encargada de buscar un termino dentro del diccionario
+ * @param termino: termino a buscar
+ * @return: si existe devuelve un puntero a la palabra, sino devuelve nullptr.
+ */
+Palabra* GestorTextos::buscarTermino(string termino) {
+    Palabra *pal = diccionario.buscarTermino(termino);
+    if( pal != nullptr){
+        return pal;
+    }else{
+        return nullptr;
+    }
+}
 
 
-
-
-/*
-Documento GestorTextos::getDocumento( int numDoc ) {
-    return documentos[numDoc-1];
+/**
+ * Función encargada de devolver una lista con la familia de palabras dada una raiz
+ * @param raiz: raiz de las palabras a buscar
+ * @return una lista con la familia de palabras.
+ */
+list<Palabra> GestorTextos::buscarFamilias(string raiz) {
+    
+    return diccionario.buscarFamilias(raiz);
     
 }
-*/
 
+void GestorTextos::accesoDocumento(int documento) {
+    documentos[documento -1].chequearTexto();
+}
 
+int GestorTextos::tamDiccionario() {
+    return diccionario.tamMapa();
+}
 
 
 

@@ -96,14 +96,18 @@ unsigned int DiccionarioConVerbos::tamMapa() {
 }
 
 list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
+    list<Palabra> listaFamilia;
     auto it = palabras.lower_bound(raiz);
-    string aux = it->first;
-    while(){
-        std::string str;
+    size_t found = it->first.find(raiz);
+    while(found != string::npos){
         
+        Palabra *pal = &it->second;
+        listaFamilia.push_back(*pal);
         
-    it.operator ++();
-    Palabra *pal = &it->second;
-    cout<<"stop";
+        it.operator ++();
+        found = it->first.find(raiz);
+    
+    
     }
+    return listaFamilia;
 }

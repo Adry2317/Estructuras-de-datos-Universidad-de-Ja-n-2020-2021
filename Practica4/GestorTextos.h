@@ -16,9 +16,10 @@
 #include "DiccionarioConVerbos.h"
 #include "Documento.h"
 #include <vector>
+#include <list>
 class GestorTextos {
 private:
-    //un solo diccionario
+    
 vector<Documento> documentos;
 DiccionarioConVerbos diccionario;
     
@@ -28,9 +29,11 @@ public:
     GestorTextos(const GestorTextos& orig);
     virtual ~GestorTextos();
    
-    void addDocumento (string _documento, int tipoDiccionario);
-    Documento getDocumento( int numDoc);
-    
+    void addDocumento (string _documento);
+    Palabra* buscarTermino(string termino);
+    list<Palabra> buscarFamilias(string raiz);
+    void accesoDocumento( int documento);
+    int tamDiccionario();
 };
 
 #endif /* GESTORTEXTOS_H */
