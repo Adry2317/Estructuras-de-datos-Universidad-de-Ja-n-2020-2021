@@ -11,6 +11,9 @@
  * Created on 15 de noviembre de 2020, 14:02
  */
 
+#include <bits/stl_algobase.h>
+#include <iosfwd>
+
 #include "DiccionarioConVerbos.h"
 
 DiccionarioConVerbos::DiccionarioConVerbos() {
@@ -42,7 +45,10 @@ DiccionarioConVerbos::DiccionarioConVerbos(string _nombreDicc, string _nombreDic
     }
 }
 
-
+/**
+ * Constructor copia de la clase DiccionarioConVerbos
+ * @param orig:Diccionario a copiar
+ */
 DiccionarioConVerbos::DiccionarioConVerbos(const DiccionarioConVerbos& orig) {
     nombreDicc = orig.nombreDicc;
     nombreDiccVerbos = orig.nombreDiccVerbos;
@@ -87,4 +93,17 @@ void DiccionarioConVerbos::inseraInexistente(Palabra pal) {
  */
 unsigned int DiccionarioConVerbos::tamMapa() {
     return palabras.size();
+}
+
+list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
+    auto it = palabras.lower_bound(raiz);
+    string aux = it->first;
+    while(){
+        std::string str;
+        
+        
+    it.operator ++();
+    Palabra *pal = &it->second;
+    cout<<"stop";
+    }
 }

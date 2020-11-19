@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
 //    dicc.buscarTermino(aux);
     string mancha = "mancha";
     Palabra *pal = dicc.buscarTermino(mancha);
-    
+    string raiz = "flor";
+    dicc.buscarFamilias(raiz);
     cout<<pal->getOcurrencias();
     
     return 0;

@@ -17,6 +17,7 @@
 #include <map>
 #include "Palabra.h"
 #include <fstream>
+#include <list>
 using namespace std;
 class DiccionarioConVerbos {
 private:
@@ -29,7 +30,7 @@ public:
     DiccionarioConVerbos(const DiccionarioConVerbos& orig);
     Palabra* buscarTermino(string termino);
     void inseraInexistente( Palabra pal );
-    //Falata el buscar familias
+    list<Palabra> buscarFamilias( string raiz );
     unsigned int tamMapa();
     virtual ~DiccionarioConVerbos();
 
