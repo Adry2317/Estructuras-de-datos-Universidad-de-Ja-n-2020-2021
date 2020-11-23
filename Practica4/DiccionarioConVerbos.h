@@ -17,6 +17,7 @@
 #include <map>
 #include "Palabra.h"
 #include <fstream>
+#include "Documento.h"
 #include <list>
 using namespace std;
 class DiccionarioConVerbos {
@@ -28,10 +29,12 @@ public:
     DiccionarioConVerbos();
     DiccionarioConVerbos(string _nombreDicc, string _nombreDiccVerbos);
     DiccionarioConVerbos(const DiccionarioConVerbos& orig);
+    DiccionarioConVerbos& operator=(const DiccionarioConVerbos &dicc);
     Palabra* buscarTermino(string termino);
-    void inseraInexistente( Palabra pal );
+    void inseraInexistente( Palabra pal, Documento *doc);
     list<Palabra> buscarFamilias( string raiz );
     unsigned int tamMapa();
+    void palEnDocumento();
     virtual ~DiccionarioConVerbos();
 
 

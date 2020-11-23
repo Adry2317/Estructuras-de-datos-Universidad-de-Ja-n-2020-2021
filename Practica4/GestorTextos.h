@@ -20,7 +20,7 @@
 class GestorTextos {
 private:
     
-vector<Documento> documentos;
+list<Documento> documentos;
 DiccionarioConVerbos diccionario;
     
 public:
@@ -28,12 +28,15 @@ public:
     GestorTextos(string _documento, string _diccionario, string _verbos);
     GestorTextos(const GestorTextos& orig);
     virtual ~GestorTextos();
-   
+    
+    GestorTextos& operator=(const GestorTextos &gestor);
     void addDocumento (string _documento);
+    Documento* buscarDocumento(string doc);
     Palabra* buscarTermino(string termino);
     list<Palabra> buscarFamilias(string raiz);
-    void accesoDocumento( int documento);
+    
     int tamDiccionario();
+    void mostrarPalabrasAsociadaDocumento();
 };
 
 #endif /* GESTORTEXTOS_H */

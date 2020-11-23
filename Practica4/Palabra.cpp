@@ -27,11 +27,11 @@ Palabra::Palabra():palabra(""), dicVerbos(nullptr),ocurrencias(0), doc(nullptr) 
  * Constructor parametrizado
  * @param pal.
  */
-Palabra::Palabra(string pal, DiccionarioConVerbos *_dicVerbos, int _ocurrencias, Documento *_doc){
+Palabra::Palabra(string pal, DiccionarioConVerbos *_dicVerbos, int _ocurrencias){
     palabra = pal;
     dicVerbos = _dicVerbos;
     ocurrencias = _ocurrencias;
-    doc = _doc;
+    doc = nullptr;
 }
 
 
@@ -60,7 +60,9 @@ string Palabra::getPalabra(){
 Palabra& Palabra::operator=(const Palabra &pal){
     if(this != &pal){
         palabra = pal.palabra;
-        
+        dicVerbos = pal.dicVerbos;
+        ocurrencias = pal.ocurrencias;
+        doc = pal.doc;
         
     }else{
         throw std::invalid_argument("Las palabras ya son iguales");
@@ -163,7 +165,7 @@ Palabra Palabra::reves(){
         swap(alReves[i], alReves[aux -i -1]);
     }
     
-    Palabra palReves(alReves, dicVerbos, ocurrencias, doc);
+    Palabra palReves(alReves, dicVerbos, ocurrencias);
     return palReves;
     
 }
@@ -176,7 +178,7 @@ Palabra Palabra::reves(){
 string Palabra::limpiar(Palabra palabra) {
     string palabraLimpia = palabra.getPalabra();
     
-    char caract[] = ("¿" "?" "-" "_" "." "," ";" "'" "(" ")" "1" "2" "3" "4" "5" "6" "7" "8" "9" "!" "¡" "0" "\"" );
+    char caract[] = ("¿" "?" "-" "_" "." "," ";" "'" "(" ")" "1" "2" "3" "4" "5" "6" "7" "8" "9" "!" "¡" "0" "\"" "*" );
                     
     for (int i = 0; i < strlen(caract); i++){
         palabraLimpia.erase(std::remove(palabraLimpia.begin(), palabraLimpia.end(), caract[i]),palabraLimpia.end());
@@ -192,6 +194,17 @@ int Palabra::getOcurrencias() {
     return ocurrencias;
 }
 
+Documento* Palabra::getDocumento() {
+    return doc;
+}
+
+
+
 
 Palabra:: ~Palabra(){
 }
+
+void Palabra::setDocumento(Documento* _doc) {
+    this->doc = _doc;
+}
+

@@ -28,7 +28,8 @@ Documento::Documento():nombreFich("") {
  * @param _dicc1: puntero al diccionario.
  */
 
-Documento::Documento(string _nombreFich, DiccionarioConVerbos *_dicc1 ):nombreFich(_nombreFich),dicc1(_dicc1){
+Documento::Documento(string _nombreFich, DiccionarioConVerbos *_dicc1 ):
+nombreFich(_nombreFich),dicc1(_dicc1){
    
 }
 
@@ -50,6 +51,16 @@ Documento::Documento(const Documento& orig) {
 Documento::~Documento() {
 }
 
+Documento& Documento::operator=(const Documento& doc) {
+    if (this != &doc){
+        dicc1 = doc.dicc1;
+        nombreFich = doc.nombreFich;
+    }else{
+        throw std::invalid_argument("Los documentos son iguales");
+    }
+    return *this;
+}
+
 
 
 void Documento::chequearTexto() {
@@ -60,22 +71,25 @@ void Documento::chequearTexto() {
         
         while(fe){
             fe >> palabra;
-            Palabra aux (palabra, nullptr, 0, nullptr);
+            Palabra aux (palabra, nullptr, 0);
             string palabraLimpia = aux.limpiar(aux);
-            
             
             for_each(palabraLimpia.begin(), palabraLimpia.end(), [](char & c){
                 c = ::tolower(c);
             });
+            
             Palabra *aux2 = dicc1->buscarTermino(palabraLimpia);
             
-            if( aux2 == 0 ){
-                Palabra palInsert(palabraLimpia, dicc1, 0,this);
-                dicc1->inseraInexistente(palInsert);
+            if( aux2 == nullptr ){
+                Palabra palInsert(palabraLimpia, nullptr, 0);
+                dicc1->inseraInexistente(palInsert, this);
                 
             }else{
                 aux2->incrementaOcurrencia();
-                //cout<<"stop";
+                if(aux.getDocumento() != this){
+                  aux2->setDocumento(this);  
+                }
+                
             }
             
         }
@@ -87,8 +101,13 @@ void Documento::chequearTexto() {
         throw invalid_argument("El nombre del documento está en blanco");
     }
    
+    
+    
 }
 
+string Documento::getNombreFich() {
+    return nombreFich;
+}
 
 
 

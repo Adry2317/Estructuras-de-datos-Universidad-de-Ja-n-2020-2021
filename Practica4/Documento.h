@@ -28,10 +28,11 @@ public:
     Documento();
     Documento( string _nombreFich, DiccionarioConVerbos *_dicc1 );
     Documento(const Documento& orig);
+    Documento& operator=(const Documento &doc);
     virtual ~Documento();
     
     void chequearTexto();
-   
+    string getNombreFich();
   
         
     

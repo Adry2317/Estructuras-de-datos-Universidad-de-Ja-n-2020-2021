@@ -23,13 +23,11 @@ GestorTextos::GestorTextos() {
  */
 
 GestorTextos::GestorTextos(string _documento, string _diccionario, string _verbos) {
-    try{
+    
     this->diccionario = DiccionarioConVerbos(_diccionario, _verbos);
     Documento text(_documento, &diccionario);
     documentos.push_back(text);
-    }catch(invalid_argument &e){
-        cerr<<e.what();
-    }
+   
     
     
     
@@ -49,15 +47,26 @@ GestorTextos::GestorTextos(const GestorTextos& orig) {
    
 }
 
+GestorTextos& GestorTextos::operator=(const GestorTextos& gestor) {
+    if(this != &gestor){
+       diccionario = gestor.diccionario;
+       documentos = gestor.documentos;
+    }else{
+        throw std::invalid_argument("Los gestores son iguales");
+    }
+    return *this;
+}
+
 
 
 GestorTextos::~GestorTextos() {
 }
 
 void GestorTextos::addDocumento(string _documento) {
-
-    Documento nuevoDoc(_documento, &diccionario);
-    documentos.push_back(nuevoDoc);
+   
+    Documento doc (_documento, &diccionario);
+    documentos.push_back(doc);
+    
 }
 
 /**
@@ -86,13 +95,21 @@ list<Palabra> GestorTextos::buscarFamilias(string raiz) {
     
 }
 
-void GestorTextos::accesoDocumento(int documento) {
-    documentos[documento -1].chequearTexto();
-}
 
 int GestorTextos::tamDiccionario() {
     return diccionario.tamMapa();
 }
 
+void GestorTextos::mostrarPalabrasAsociadaDocumento() {
+    diccionario.palEnDocumento();
+}
 
-
+Documento* GestorTextos::buscarDocumento(string doc) {
+    for(list<Documento>::iterator it = documentos.begin(); it!=documentos.end(); it++){
+        if(it->getNombreFich() == doc){
+            return &it.operator *();
+        }
+        
+    }
+    return nullptr;
+}

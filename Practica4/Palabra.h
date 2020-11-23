@@ -32,7 +32,7 @@ private:
 public:
     Palabra();
    
-    Palabra(string pal, DiccionarioConVerbos *_dicVerbos, int _ocurrencias, Documento *_doc);
+    Palabra(string pal, DiccionarioConVerbos *_dicVerbos, int _ocurrencias);
     Palabra(const Palabra& orig);
     
     string getPalabra();
@@ -48,6 +48,8 @@ public:
     void incrementaOcurrencia();
     int getOcurrencias();
     string limpiar(Palabra palabra);
+    Documento* getDocumento();
+    void setDocumento (Documento *_doc);
     
     virtual ~Palabra();
 

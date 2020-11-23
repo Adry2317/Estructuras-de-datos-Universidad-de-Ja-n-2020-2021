@@ -27,7 +27,7 @@ DiccionarioConVerbos::DiccionarioConVerbos(string _nombreDicc, string _nombreDic
         
         while(fe) {
             fe >> palabra;
-            Palabra pal (palabra, this, 0, nullptr);
+            Palabra pal (palabra, this, 0);
             palabras[palabra] = (pal);
         }
         
@@ -36,7 +36,7 @@ DiccionarioConVerbos::DiccionarioConVerbos(string _nombreDicc, string _nombreDic
         
         while(fe2){
             fe2 >> palabra2;
-            Palabra pal2 (palabra2, this, 0, nullptr);
+            Palabra pal2 (palabra2, this, 0);
             palabras[palabra2] = (pal2);
         }
         
@@ -55,6 +55,21 @@ DiccionarioConVerbos::DiccionarioConVerbos(const DiccionarioConVerbos& orig) {
     palabras = orig.palabras;
 }
 
+DiccionarioConVerbos& DiccionarioConVerbos::operator=(const DiccionarioConVerbos& dicc) {
+    if(this != &dicc){
+        nombreDicc = dicc.nombreDicc;
+        nombreDiccVerbos = dicc.nombreDiccVerbos;
+        palabras = dicc.palabras;
+        
+    }else{
+        throw std::invalid_argument("Los Diccionarios son iguales");
+    }
+    return *this;
+}
+
+
+
+
 DiccionarioConVerbos::~DiccionarioConVerbos() {
 }
 
@@ -65,27 +80,34 @@ DiccionarioConVerbos::~DiccionarioConVerbos() {
  * @return: un puntero a la palabra;
  */
 Palabra* DiccionarioConVerbos::buscarTermino(string termino) {
-    Palabra *palBuscada;
+    
     
     map<string,Palabra>::iterator it = palabras.find(termino);
-    palBuscada = &it->second;
-    
-    if(palBuscada->getPalabra() == termino)
+    if(it != palabras.end()){
+    Palabra *palBuscada = &it->second;
+   
     return palBuscada;
     
-    else
+    
+    }else{
         return nullptr;
-    
-    
+    }
 }
 
 /**
  * Función encargada de insertar en el diccionario la palabras que no se encuentren en el mismo.
  * @param pal: palabra a insertar.
  */
-void DiccionarioConVerbos::inseraInexistente(Palabra pal) {
-    palabras[pal.getPalabra()] = pal;
-}
+void DiccionarioConVerbos::inseraInexistente(Palabra pal,Documento *doc) {
+    string clave = pal.getPalabra();
+    Palabra insert = pal;
+    insert.setDocumento(doc);
+    palabras[clave] = insert;
+    
+    
+    
+    
+    }
 
 /**
  * Función para saber el tamaño del mapa 
@@ -95,6 +117,13 @@ unsigned int DiccionarioConVerbos::tamMapa() {
     return palabras.size();
 }
 
+
+
+/**
+ * Función encargada de buscar las familias de palabras dada una raíz
+ * @param raiz: raíz a partir de la que se buscaran la familia de palabras
+ * @return: una lista con la familia de palabras
+ */
 list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
     list<Palabra> listaFamilia;
     auto it = palabras.lower_bound(raiz);
@@ -110,4 +139,23 @@ list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
     
     }
     return listaFamilia;
+    
+    
+    
+}
+
+void DiccionarioConVerbos::palEnDocumento() {
+ map<string, Palabra>::iterator it = palabras.begin();
+ it.operator ++();
+ int cont = 0;
+ while (it != palabras.end()  && cont < 100){
+     Palabra *pal = &it->second;
+     if (pal->getDocumento() != nullptr ){
+         cout<<pal->getPalabra()<<"-->"<<pal->getDocumento()->getNombreFich()<<endl;
+        
+         cont++;
+         
+     }
+     it.operator ++();
+ }
 }
