@@ -95,15 +95,26 @@ list<Palabra> GestorTextos::buscarFamilias(string raiz) {
     
 }
 
-
+/**
+ * Función para saber el tamaño del mapa
+ * @return: devuelve el tamaño mapa
+ */
 int GestorTextos::tamDiccionario() {
     return diccionario.tamMapa();
 }
 
+/**
+ * Accede al diccionario y muestra aquelals palabras que tengan un Documento aosciado.
+ */
 void GestorTextos::mostrarPalabrasAsociadaDocumento() {
     diccionario.palEnDocumento();
 }
 
+/**
+ * Función que busca un documento dentro de la lista
+ * @param doc: nombre del documento a buscar
+ * @return: devuelve un puntero al documento buscado
+ */
 Documento* GestorTextos::buscarDocumento(string doc) {
     for(list<Documento>::iterator it = documentos.begin(); it!=documentos.end(); it++){
         if(it->getNombreFich() == doc){

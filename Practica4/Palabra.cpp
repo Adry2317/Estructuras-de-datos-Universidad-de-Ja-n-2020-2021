@@ -186,6 +186,9 @@ string Palabra::limpiar(Palabra palabra) {
     return palabraLimpia;
 }
 
+/**
+ * Función que incrementa la ocurrencia de la palabra
+ */
 void Palabra::incrementaOcurrencia() {
      ocurrencias++;
 }

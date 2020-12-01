@@ -51,6 +51,11 @@ Documento::Documento(const Documento& orig) {
 Documento::~Documento() {
 }
 
+/**
+ * Sobre Carga del operador de asignacion
+ * @param doc: documento del cual vamos a asignar los valores
+ * @return: devuelve el documento con los valores del que le hemos pasado
+ */
 Documento& Documento::operator=(const Documento& doc) {
     if (this != &doc){
         dicc1 = doc.dicc1;
@@ -62,7 +67,10 @@ Documento& Documento::operator=(const Documento& doc) {
 }
 
 
-
+/**
+ * Función encargada de chequear el documento, si la palabra no existe en el diccionario
+ * se inserta en el mapa, si existe se incrementa la ocurrencia
+ */
 void Documento::chequearTexto() {
     if(nombreFich != ""){
         

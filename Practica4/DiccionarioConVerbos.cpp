@@ -128,7 +128,7 @@ list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
     list<Palabra> listaFamilia;
     auto it = palabras.lower_bound(raiz);
     size_t found = it->first.find(raiz);
-    while(found != string::npos){
+    while(found != string::npos && it != palabras.end()){
         
         Palabra *pal = &it->second;
         listaFamilia.push_back(*pal);
@@ -144,6 +144,10 @@ list<Palabra> DiccionarioConVerbos::buscarFamilias(string raiz) {
     
 }
 
+
+/**
+ * Función que muestra las palabras que tienen asociadas un documento.
+ */
 void DiccionarioConVerbos::palEnDocumento() {
  map<string, Palabra>::iterator it = palabras.begin();
  it.operator ++();

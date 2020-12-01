@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=MinGW-Windows
-CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
-CND_ARTIFACT_NAME_Debug=practica2.1
-CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/practica2.1
-CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
-CND_PACKAGE_NAME_Debug=practica2.1.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/practica2.1.tar
+CND_PLATFORM_Debug=Cygwin-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
+CND_ARTIFACT_NAME_Debug=practica2
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/practica2
+CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
+CND_PACKAGE_NAME_Debug=practica2.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/practica2.tar
 # Release configuration
-CND_PLATFORM_Release=MinGW-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
-CND_ARTIFACT_NAME_Release=practica2.1
-CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/practica2.1
-CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
-CND_PACKAGE_NAME_Release=practica2.1.tar
-CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/practica2.1.tar
+CND_PLATFORM_Release=Cygwin-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
+CND_ARTIFACT_NAME_Release=practica2
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/practica2
+CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
+CND_PACKAGE_NAME_Release=practica2.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/practica2.tar
 #
 # include compiler specific variables
 #
