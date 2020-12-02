@@ -32,16 +32,17 @@ public:
     DiccionarioConVerbos(string _nombreDicc, string _nombreDiccVerbos, float carga, unsigned tamDatos);
     DiccionarioConVerbos(const DiccionarioConVerbos& orig);
     DiccionarioConVerbos& operator=(const DiccionarioConVerbos &dicc);
-    Palabra* buscarTermino(unsigned long clave, string termino);
+    Palabra* buscarTermino( string termino);
     unsigned int MAxColisiones();
     float promedioCol();
     unsigned int tamTabla();
     float factCarga();
     bool insertaTabla(Palabra &pal);
+    bool borraPalabra( string termino);
     unsigned int colisiones();
     void palEnDocumento();
     virtual ~DiccionarioConVerbos();
-    void borrarPalInicioDado( char letra);
+    
 
 };
 

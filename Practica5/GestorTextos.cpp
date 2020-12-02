@@ -39,8 +39,6 @@ GestorTextos::GestorTextos(string _documento, string _diccionario, string _verbo
  * Constructor copia de la clase documento.
  * @param orig: Documento del cual vamos a copiar.
  */
-
-
 GestorTextos::GestorTextos(const GestorTextos& orig) {
   
     this->diccionario = orig.diccionario;
@@ -48,6 +46,11 @@ GestorTextos::GestorTextos(const GestorTextos& orig) {
    
 }
 
+/**
+ * Sobre carga del operador de asignación
+ * @param gestor: gestor desde el cual se van a asignar los valores
+ * @return: devuelve el gestor con los datos del pasado.
+ */
 GestorTextos& GestorTextos::operator=(const GestorTextos& gestor) {
     if(this != &gestor){
        diccionario = gestor.diccionario;
@@ -63,6 +66,11 @@ GestorTextos& GestorTextos::operator=(const GestorTextos& gestor) {
 GestorTextos::~GestorTextos() {
 }
 
+
+/**
+ * Función que añade un documento
+ * @param _documento: nombre del documento a insertar.
+ */
 void GestorTextos::addDocumento(string _documento) {
    
     Documento doc (_documento, &diccionario);
@@ -75,8 +83,8 @@ void GestorTextos::addDocumento(string _documento) {
  * @param termino: termino a buscar
  * @return: si existe devuelve un puntero a la palabra, sino devuelve nullptr.
  */
-Palabra* GestorTextos::buscarTermino(unsigned long clave, string termino) {
-    Palabra *pal = diccionario.buscarTermino(clave, termino);
+Palabra* GestorTextos::buscarTermino( string termino) {
+    Palabra *pal = diccionario.buscarTermino( termino);
     
     if (pal != nullptr){
         return pal;
@@ -86,10 +94,31 @@ Palabra* GestorTextos::buscarTermino(unsigned long clave, string termino) {
     }
 }
 
+
+/**
+ * Función para insertar en la tabla hash
+ * @param pal: palabra a insertar.
+ * @return: devuelve true si se ha insertado y false si no se ha insertado.
+ */
 bool GestorTextos::insertarTabla(Palabra &pal) {
-    diccionario.insertaTabla(pal);
+    return diccionario.insertaTabla(pal);
 }
 
+
+/**
+ * Función para borrar en la tabla hash
+ * @param pal: palabra a insertar.
+ * @return: devuelve true si se ha borrado y false si no se ha borrado.
+ */
+bool GestorTextos::borraPalabra( string termino) {
+    return diccionario.borraPalabra(termino);
+}
+
+
+/**
+ * Función que devuelve el numero de colisiones
+ * @return 
+ */
 unsigned int GestorTextos::colisiones() {
     return diccionario.colisiones();
 }

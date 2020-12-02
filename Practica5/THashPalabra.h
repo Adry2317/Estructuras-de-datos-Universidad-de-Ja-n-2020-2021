@@ -15,6 +15,7 @@
 #define THASHPALABRA_H
 #include "Palabra.h"
 #include <cmath>
+#include <vector>
 using namespace std;
 enum estado{
     vacio,
@@ -38,7 +39,7 @@ struct casilla{
 
 class THashPalabra {
 private:
-    casilla *vectHash;
+    vector <casilla> vectHash;
     unsigned long hash( unsigned long clave, int intento );
     float factorCarga;
     

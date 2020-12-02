@@ -17,7 +17,7 @@
 //Entreno
 
 THashPalabra::THashPalabra() {
-    vectHash = new casilla;
+    
 }
 
 
@@ -44,7 +44,7 @@ THashPalabra::THashPalabra(float _factorCarga, unsigned tamDatos):factorCarga(_f
     }
     
     tamTabla = aux;
-    vectHash = new casilla[tamTabla];
+    vectHash.resize(tamTabla);
     slotVacios = tamTabla;
 }
 
@@ -62,11 +62,9 @@ THashPalabra::THashPalabra(const THashPalabra& orig) {
     slotOcupados = orig.slotOcupados;
     maxColisiones = orig.maxColisiones;
     colisiones = orig.colisiones;
-    vectHash = new casilla[orig.tamTabla];
+    vectHash = orig.vectHash;
     
-        for (int i = 0; i < orig.tamTabla; i++){
-            vectHash[i] = orig.vectHash[i];
-        }
+     
             
 }
 
@@ -85,13 +83,9 @@ THashPalabra& THashPalabra::operator=(const THashPalabra& Thash) {
         slotVacios = Thash.slotVacios;
         maxColisiones = Thash.maxColisiones;
         colisiones = Thash.colisiones;
+        vectHash = Thash.vectHash;
         
         
-        vectHash = new casilla[Thash.tamTabla];
-    
-        for (int i = 0; i < Thash.tamTabla; i++){
-            vectHash[i] = Thash.vectHash[i];
-        }
     }else{
         throw std::invalid_argument("Las tablas hash son iguales");
                
@@ -168,7 +162,9 @@ bool THashPalabra::insertar(unsigned long clave, Palabra& pal) {
     
    
     
-    for ( int i = 0; i < tamTabla; i++){
+    int contador = 1000;
+    
+    while(contador != 0){
         aux = hash( clave , intento );
         auto aux2 = vectHash[aux];
         if( vectHash[aux].estadoTabla == disponible || vectHash[aux].estadoTabla == vacio ){
@@ -188,7 +184,7 @@ bool THashPalabra::insertar(unsigned long clave, Palabra& pal) {
         }
         
         intento++;
-        
+        contador--;
         colisiones++;
         
         if ( intento > maxColisiones){
@@ -210,7 +206,9 @@ bool THashPalabra::buscar(unsigned long clave, string& termino, Palabra *&pal) {
     unsigned long aux;
     int intento  = 0;
     
-    for ( int i = 0; i < tamTabla; i++){
+    int contador = 1000;
+    
+    while(contador != 0){
         aux = hash( clave, intento );
         
         if( vectHash[aux].estadoTabla == ocupado && vectHash[aux].pal.getPalabra() == termino){
@@ -218,6 +216,7 @@ bool THashPalabra::buscar(unsigned long clave, string& termino, Palabra *&pal) {
             return true;
         }
         intento ++;
+        contador--;
     }
     pal = nullptr;
     return false;
@@ -234,10 +233,12 @@ bool THashPalabra::buscar(unsigned long clave, string& termino, Palabra *&pal) {
 bool THashPalabra::borrar(unsigned long clave, string& termino) {
     unsigned long aux;
     int intento = 0;
+    int contador = 1000;
     
-    for ( int i = 0; i < tamTabla; i++){
+    while(contador != 0){
+       aux = hash( clave , intento );
         
-        if (vectHash[aux].estadoTabla == ocupado && vectHash[aux].pal.getPalabra() == termino){
+        if ((vectHash[aux].estadoTabla == ocupado) && (vectHash[aux].pal.getPalabra() == termino)){
             
             vectHash[aux].estadoTabla = disponible;
             slotDisponibles++;
@@ -245,6 +246,7 @@ bool THashPalabra::borrar(unsigned long clave, string& termino) {
             return true;
         }
         intento ++;
+        contador--;
     }
     return false;
 }
@@ -258,10 +260,19 @@ unsigned int THashPalabra::numPalabras() {
     return slotOcupados;
 }
 
+/**
+ * 
+ * @return: devuelve el maximo de colisiones. 
+ */
 unsigned int THashPalabra::maximoColisiones() {
     return maxColisiones;
 }
 
+
+/**
+ * 
+ * @return: Devuelve el promedio de colisiones. 
+ */
  float THashPalabra::promedioColisiones() {
     
     float col = (float) colisiones;
@@ -270,20 +281,34 @@ unsigned int THashPalabra::maximoColisiones() {
     return col / slotOc;
 }
 
+ 
+ /**
+  * 
+  * @return: Devuelve el factor de carga. 
+  */
 float THashPalabra::_factorCarga() {
     return factorCarga;
 }
 
+
+/**
+ * 
+ * @return devuelve el tamaño de la tabla.
+ */
 unsigned int THashPalabra::tamañoTabla() {
     return tamTabla;
 }
 
+/**
+ * 
+ * @return: devuelve el numero de colisiones 
+ */
 unsigned int THashPalabra::_colisiones() {
     return colisiones;
 }
 
 
 THashPalabra::~THashPalabra() {
-    delete [] vectHash;
+  
 }
 

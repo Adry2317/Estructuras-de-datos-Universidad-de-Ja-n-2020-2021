@@ -82,10 +82,16 @@ DiccionarioConVerbos& DiccionarioConVerbos::operator=(const DiccionarioConVerbos
 DiccionarioConVerbos::~DiccionarioConVerbos() {
 }
 
-Palabra* DiccionarioConVerbos::buscarTermino(unsigned long clave, string termino) {
+/**
+* Función encargada de buscar un termino dentro de la tabla hash
+ * @param termino: termino a buscar
+ * @return: si existe devuelve un puntero a la palabra, sino devuelve nullptr.
+ * @return 
+ */
+Palabra* DiccionarioConVerbos::buscarTermino( string termino) {
     Palabra *pal;
-     
-    terminos.buscar(clave, termino, pal);
+    unsigned long clave = terminos.djb2(termino);
+    terminos.buscar( clave,termino, pal);
     if(pal != nullptr)
         return pal;
     
@@ -93,39 +99,44 @@ Palabra* DiccionarioConVerbos::buscarTermino(unsigned long clave, string termino
         return nullptr;
 }
 
+
 unsigned int DiccionarioConVerbos::MAxColisiones() {
     return terminos.maximoColisiones();
 }
+
 
 float DiccionarioConVerbos::factCarga() {
     return terminos._factorCarga();
 }
 
+
 unsigned int DiccionarioConVerbos::tamTabla() {
     return terminos.tamañoTabla();
 }
+
 
 float DiccionarioConVerbos::promedioCol() {
     return terminos.promedioColisiones();
 }
 
+
 bool DiccionarioConVerbos::insertaTabla(Palabra &pal) {
     string termino = pal.getPalabra();
     unsigned long clave = terminos.djb2(termino);
     
-    terminos.insertar(clave, pal);
+   return terminos.insertar(clave, pal);
 }
+
 
 unsigned int DiccionarioConVerbos::colisiones() {
     return terminos._colisiones();
 }
 
-void DiccionarioConVerbos::borrarPalInicioDado(char letra) {
-    for (int i = 0; i < terminos.tamañoTabla(); i++){
-        
-        
-    }
+
+bool DiccionarioConVerbos::borraPalabra( string termino) {
+    unsigned long clave = terminos.djb2(termino);
     
+    return terminos.borrar(clave, termino);
 }
 
 

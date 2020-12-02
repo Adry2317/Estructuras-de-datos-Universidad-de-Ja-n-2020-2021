@@ -33,7 +33,8 @@ public:
     GestorTextos& operator=(const GestorTextos &gestor);
     void addDocumento (string _documento);
     bool insertarTabla(Palabra &pal);
-    Palabra* buscarTermino( unsigned long clave, string termino);
+    bool borraPalabra( string termino);
+    Palabra* buscarTermino(  string termino);
     unsigned int colisiones();
     
     
