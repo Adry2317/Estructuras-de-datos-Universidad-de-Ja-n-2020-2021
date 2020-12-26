@@ -24,7 +24,7 @@ class DiccionarioConVerbos;
 class Documento {
 private:
     string nombreFich;
-    list<Palabra> palabras;
+    list<Palabra> palabrasInexistentes;
     DiccionarioConVerbos *dicc1;
 public:
     Documento();
@@ -32,7 +32,7 @@ public:
     Documento(const Documento& orig);
     Documento& operator=(const Documento &doc);
     virtual ~Documento();
-    
+    void insertaInexistente(Palabra pal);
     void chequearTexto();
     string getNombreFich();
   
