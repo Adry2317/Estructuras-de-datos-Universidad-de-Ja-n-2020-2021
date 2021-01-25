@@ -164,7 +164,7 @@ public:
     T* buscar( float x, float y, const T& dato){
         Casilla<T> *c = obtenerCasilla( x , y );
         
-        c->buscar( dato );
+       return c->buscar( dato );
         
     }
     

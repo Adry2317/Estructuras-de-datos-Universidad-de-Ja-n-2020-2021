@@ -46,7 +46,7 @@ public:
     int cantidadUsuarios();
     int usuariosConectados();
     int OcurrenciaPal(string termino);
-    void escribeMensajeConectados();
+   
 
 };
 

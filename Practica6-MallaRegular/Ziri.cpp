@@ -145,7 +145,7 @@ Usuario* Ziri::nuevoUsuarioConectado(string nif, string pass) {
     map<string, Usuario>::iterator it = usuariosNIF.find(nif);
     
     if( it->second.getClave() == pass){
-        //comprobar puntero.
+      
         conectados.push_back(&it->second);
         return &it->second;
     }
@@ -208,17 +208,6 @@ int Ziri::usuariosConectados() {
 
 
 
-void Ziri::escribeMensajeConectados() {
-    list<Usuario*>::iterator it;
-    int i = 0;
-    for(it = conectados.begin(); it != conectados.end(); it ++ ){
-        Usuario *usu = it.operator *();
-        usu->escribeMensaje();
-        
-        
-    }
-   
-}
 
 list<Usuario*> Ziri::buscarTerminoRango(string termino, float rxmin, float rymin, float rxMax, float rymax) {
     

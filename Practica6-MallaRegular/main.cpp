@@ -101,6 +101,7 @@ int main(int argc, char** argv) {
             nif = usu2->getNif();
             clave = usu2->getClave();
             usu2->login( nif, clave );
+            usu2->escribeMensaje();
             i++;
         }
         
@@ -123,7 +124,8 @@ int main(int argc, char** argv) {
         cout<<"El usuario se ha conectado satisfactoriamente"<<endl;
     }
     
-    ziri.escribeMensajeConectados();
+    
+    
     
     list<Usuario*> listaUsuarios;
     listaUsuarios = ziri.analizartermino("casa");
@@ -148,7 +150,7 @@ int main(int argc, char** argv) {
     list<Usuario*> usuarios3;
     usuarios2 = ziri.buscarTerminoRango("extranjero", 3.0,37.0,4.0,38.0);
     cout<<"Usuarios de Jaen que han escrito 'extranjero': "<<usuarios2.size()<<endl;
-    cout<<"Concurrencia palabra 'extranjero': "<<ziri.OcurrenciaPal("extranjero")<<endl;
+    cout<<"Concurrencia palabra 'extranjero': "<<ziri.OcurrenciaPal("extranjero");
     
     
     return 0;
