@@ -122,12 +122,3 @@ bool GestorTextos::borraPalabra( string termino) {
 unsigned int GestorTextos::colisiones() {
     return diccionario.colisiones();
 }
-
-Documento* GestorTextos::buscarDocumento(string doc) {
-    for( list<Documento>::iterator it = documentos.begin(); it!=documentos.end(); it++){
-        if(it->getNombreFich() == doc){
-            return &it.operator *();
-        }
-    }
-    return nullptr;
-}

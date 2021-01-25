@@ -32,9 +32,6 @@ int main(int argc, char** argv) {
 
     
     GestorTextos gestor (documento, diccionario, diccVerbos, 0.71, 607462);
-    //Documento *doc = gestor.buscarDocumento("quijote.txt");
-    //doc->chequearTexto();
-    
     
     string termino = "wifi";
     Palabra palInsert(termino, 0);
@@ -42,7 +39,7 @@ int main(int argc, char** argv) {
     unsigned int colAntes = gestor.colisiones();
     
    if(gestor.insertarTabla(palInsert)){
-       cout<<"La palabra "<<termino<< " se ha insertado correctamente"<<endl;
+       cout<<"La palabra se ha insertado correctamente"<<endl;
    } else {
        cout<<"La palabra no se ha podido insertar"<<endl;
    }

@@ -35,7 +35,6 @@ public:
     bool insertarTabla(Palabra &pal);
     bool borraPalabra( string termino);
     Palabra* buscarTermino(  string termino);
-    Documento* buscarDocumento( string doc );
     unsigned int colisiones();
     
     

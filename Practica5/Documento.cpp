@@ -41,7 +41,7 @@ nombreFich(_nombreFich),dicc1(_dicc1){
 Documento::Documento(const Documento& orig) {
     nombreFich = orig.nombreFich;
     dicc1 = orig.dicc1;
-    palabrasInexistentes = orig.palabrasInexistentes;
+    palabras = orig.palabras;
     
 }
 
@@ -56,7 +56,7 @@ Documento& Documento::operator=(const Documento& doc) {
     if (this != &doc){
         dicc1 = doc.dicc1;
         nombreFich = doc.nombreFich;
-        palabrasInexistentes = doc.palabrasInexistentes;
+        palabras = doc.palabras;
     }else{
         throw std::invalid_argument("Los documentos son iguales");
     }
@@ -81,11 +81,16 @@ void Documento::chequearTexto() {
             });
             Palabra pal(palabraLimpia, 0);
             
-            if (dicc1->buscarTermino(palabraLimpia) == nullptr){
-                insertaInexistente(pal);
+            list<Palabra>::iterator it = palabras.begin();
+            bool esta = false;
+            while(it != palabras.end() && esta == false ){
+                if (it->getPalabra() == palabraLimpia){
+                    it->incrementaOcurrencia();
+                    esta = true;
+                }else{
+                  palabras.push_back(pal);   
+                }
             }
-            
-            
             
            
             
@@ -107,20 +112,7 @@ string Documento::getNombreFich() {
     return nombreFich;
 }
 
-void Documento::insertaInexistente(Palabra pal) {
-    list<Palabra>::iterator it = palabrasInexistentes.begin();
-            string palLimpia = pal.getPalabra();
-            bool esta = false;
-            while(it != palabrasInexistentes.end() && esta == false ){
-                if (it->getPalabra() == palLimpia){
-                    it->incrementaOcurrencia();
-                    esta = true;
-                }else{
-                  palabrasInexistentes.push_back(pal);   
-                  
-                }
-            }
-}
+
 
 
 
